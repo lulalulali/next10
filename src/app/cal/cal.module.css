@@ -1,0 +1,75 @@
+/* styles/Calculator.module.css */
+.calculator {
+    background-color: #ffffff; /* 网页背景为浅色 */
+    color: white;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+}
+
+.display {
+    background-color: #1c1c1c; /* 计算器背景为黑色 */
+    padding: 20px;
+    text-align: right;
+}
+
+.input {
+    font-size: 32px; /* 字号较大 */
+}
+
+.result {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.buttonGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.button {
+    border: none;
+    border-radius: 10px; /* 圆角设计 */
+    padding: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* 数字按钮样式 */
+.button.number {
+    background-color: #7f7f7f; /* 数字按钮为灰色 */
+    color: white; /* 文字颜色为白色 */
+}
+
+/* 功能按钮样式 */
+.button.function {
+    background-color: #d3d3d3; /* 功能按钮为浅灰色 */
+    color: black; /* 文字颜色为黑色 */
+}
+
+/* 运算符按钮样式 */
+.button.operator {
+    background-color: #f39c12; /* 运算符按钮为浅橙色 */
+    color: white; /* 文字颜色为白色 */
+}
+
+.button:hover {
+    opacity: 0.8; /* 鼠标悬停时稍微变暗 */
+}
+
+.button:active {
+    opacity: 0.6; /* 点击时稍微变暗 */
+}
+
+/* 特殊样式 */
+.button.zero {
+    grid-column: span 2; /* 零按钮占据两列宽度 */
+    border-radius: 20px; /* 圆角较大 */
+    background-color: #7f7f7f; /* 零按钮为灰色 */
+}
