@@ -81,17 +81,20 @@ export interface ClearRowsResult {
   newGrid: number[][]; // 清除行后的新网格
   clearedRows: number; // 清除的行数
 }
-
 export const clearRows = (newGrid: number[][]): ClearRowsResult => {
+  // 过滤出没有完全填充的行（即不包含0的行）
   const filteredGrid = newGrid.filter((row) => row.some((cell) => cell === 0));
+  // 计算新网格
   const rowsToAdd = ROWS - filteredGrid.length;
   const emptyRows = Array.from({ length: rowsToAdd }, () =>
     Array(COLS).fill(0)
   );
+  // 计算被清除的行数
   const clearedRows = ROWS - filteredGrid.length;
   return {
     newGrid: [...emptyRows, ...filteredGrid],
-    clearedRows, // 返回清除的行数
+    // clearedRows: clearedRows > 0 ? Array(clearedRows).fill(1) : [],
+    clearedRows,
   };
 };
 
@@ -108,8 +111,20 @@ export const mergePiece = (
       }
     })
   );
-
   // 清除已消除的行并返回更新的网格和消除的行数
   const { newGrid: clearedGrid, clearedRows } = clearRows(newGrid);
-  return { clearedGrid, clearedRows };
+  console.log("clearedRows:", clearedRows); // 调试日志，检查clearedRows的内容
+  // 更新得分
+  let scoreIncrease = 0;
+  if (clearedRows === 1) {
+    scoreIncrease = 100; // 1行消除
+  } else if (clearedRows === 2) {
+    scoreIncrease = 250; // 2行消除
+  } else if (clearedRows === 3) {
+    scoreIncrease = 750; // 3行消除
+  } else if (clearedRows === 4) {
+    scoreIncrease = 3000; // 4行消除
+  }
+  console.log("scoreIncrease:", scoreIncrease); // 调试日志，确保分数计算正确
+  return { clearedGrid, clearedRows, scoreIncrease };
 };

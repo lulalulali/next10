@@ -79,16 +79,21 @@ const Tetris: React.FC = () => {
       setPosition(newPosition);
     } else if (rowOffset === 1) {
       // 将合并的方块和清除的行数传递回来
-      const { clearedGrid, clearedRows } = mergePiece(
+      const { clearedGrid, clearedRows, scoreIncrease } = mergePiece(
         pieceData.shape,
         position,
         grid
       );
       setGrid(clearedGrid);
-      // 更新得分，每消除一行得100分
-      setScore((prevScore) => prevScore + clearedRows * 100);
+      // 调试日志，确保得分是正确的
+      console.log("scoreIncrease:", scoreIncrease);
+
+      // 更新分数
+      setScore((prevScore) => prevScore + scoreIncrease);
+
       setPieceData(randomTetromino());
       setPosition({ row: 0, col: Math.floor(10 / 2) });
+
       if (position.row === 0) {
         setIsGameOver(true);
       }
